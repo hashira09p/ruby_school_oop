@@ -50,12 +50,6 @@ def add_course(id_number)
   new_course.id = id_number
   puts "Please input a name"
   new_course.name = gets.chomp
-  puts "Please input birthday"
-  new_course.birth_date = gets.chomp
-  puts "Please input email"
-  new_course.email = gets.chomp
-  puts "Please input phone number"
-  new_course.phone_number = gets.chomp.to_i
   new_course.save
 
   Course.all.each do |element|
@@ -91,7 +85,7 @@ while continue
         add(student_id)
         puts "Do You want to continue? Y/N"
         user_decision = gets.chomp.upcase
-        id += 1 if user_decision == "Y"
+        student_id += 1 if user_decision == "Y"
         student_continue = false if user_decision == "N"
       when 2
         delete
@@ -124,7 +118,7 @@ while continue
         add_course(course_id)
         puts "Do You want to continue? Y/N"
         user_decision = gets.chomp.upcase
-        id += 1 if user_decision == "Y"
+        course_id += 1 if user_decision == "Y"
         course_continue = false if user_decision == "N"
       when 2
         delete

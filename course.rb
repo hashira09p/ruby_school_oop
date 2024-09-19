@@ -1,6 +1,8 @@
 class Course
   attr_accessor :id, :name
 
+  @@records = []
+
   def save
     @@records.append(self)
   end
@@ -12,6 +14,10 @@ class Course
 
   def self.all
     @@records
+  end
+
+  def display
+    "ID: #{id}, Name: #{name}"
   end
 
   def self.find_by_id(id_input)
