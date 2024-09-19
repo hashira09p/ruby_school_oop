@@ -11,6 +11,10 @@ class Students
     @@records.clear
   end
 
+  def display
+    "ID: #{id}, Name: #{name}, Birthdate: #{birth_date}, Email: #{email}, Phone: #{phone_number} "
+  end
+
   def self.all
     @@records
   end
@@ -20,6 +24,6 @@ class Students
   end
 
   def self.find_by_email(email_input)
-
+    @@records.find{|element| element.email == email_input}
   end
 end
