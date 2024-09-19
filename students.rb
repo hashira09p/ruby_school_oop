@@ -7,8 +7,13 @@ class Students
     @@records.append(self)
   end
 
-  def destroy
+  def destroy_all
     @@records.clear
+  end
+
+  def self.destroy_only_one(id)
+    found_student = Students.find_by_id(id)
+    @@records.delete(found_student)
   end
 
   def display
@@ -26,4 +31,6 @@ class Students
   def self.find_by_email(email_input)
     @@records.find{|element| element.email == email_input}
   end
+
+
 end
