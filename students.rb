@@ -20,9 +20,9 @@ class Students
     "ID: #{id}, Name: #{name}, Birthdate: #{birth_date}, Email: #{email}, Phone: #{phone_number} "
   end
 
-  def self.all
-    @@records
-  end
+    def self.all
+      @@records
+    end
 
   def self.find_by_id(id_input)
     @@records.find{|element| element.id == id_input}
