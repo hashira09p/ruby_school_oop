@@ -1,10 +1,12 @@
 require_relative 'students'
 require_relative 'course'
 require_relative 'subject'
+require_relative 'teacher'
 
 student_id = 1
 course_id = 1
 subject_id = 1
+teacher_id = 1
 
 #STUDENT MANAGEMENT
 def add(id_number)
@@ -82,6 +84,7 @@ def delete_course
   end
 end
 
+#SUBJECT MANAGEMENT
 def add_subject(id_number)
   new_subject = Subject.new
   new_subject.id = id_number
@@ -116,13 +119,57 @@ def delete_subject
   end
 end
 
+def add_teacher(id_number)
+  new_teacher = Teacher.new
+  new_teacher.id = id_number
+  puts "Please input a name"
+  new_teacher.name = gets.chomp
+  puts "Please input birthday"
+  new_teacher.birth_date = gets.chomp
+  puts "Please input email"
+  new_teacher.email = gets.chomp
+  puts "Please input phone number"
+  new_teacher.phone_number = gets.chomp.to_i
+  puts "Please input phone the department"
+  new_teacher.department = gets.chomp
+  new_student.save
+
+  puts "Teacher added successfully!"
+  Teacher.all.each do |element|
+    puts element.display
+  end
+end
+
+def delete_teacher
+  puts "Please input an ID that You want to delete"
+  delete_teacher = Teacher.new
+  delete_teacher.id = gets.chomp.to_i
+
+  found = Teacher.find_by_id(delete_teacher.id)
+  failed = "Can't Find the ID" unless found
+
+  if found
+    Teacher.destroy_only_one(delete_teacher.id)
+    puts "Teacher destroyed successfully!"
+    puts " "
+    puts "These are now the updated list now."
+    Teacher.all.each do |element|
+      puts element.display
+    end
+  else
+    puts failed
+  end
+end
+
+#
 continue = true
 while continue
   puts "Please input "
   puts "[1] STUDENT MANAGEMENT"
   puts "[2] COURSE MANAGEMENT"
   puts "[3] SUBJECT MANAGEMENT"
-  puts "[4] EXIT"
+  puts "[4] Teacher MANAGEMENT"
+  puts "[5] EXIT"
   action = gets.chomp.to_i
 
   case action
@@ -231,7 +278,40 @@ while continue
     end
   when 4
 
+    #If the user choose TEACHER MANAGEMENT
+    teacher_continue = true
+    while teacher_continue
+      puts "Please input "
+      puts "[1] ADD A NEW TEACHER"
+      puts "[2] DELETE A TEACHER"
+      puts "[3] SHOW ALL THE TEACHER"
+      action = gets.chomp.to_i
+
+      case action
+      when 1
+        add(teacher_id)
+        puts "Do You want to continue? Y/N"
+        user_decision = gets.chomp.upcase
+        teacher_id += 1 if user_decision == "Y"
+        teacher_continue = false if user_decision == "N"
+      when 2
+        delete
+        puts "Do You want to continue? Y/N"
+        user_decision = gets.chomp.upcase
+        teacher_continue = false if user_decision == "N"
+      when 3
+        Students.all.each do |element|
+          puts element.display
+        end
+        puts "Do You want to continue? Y/N"
+        user_decision = gets.chomp.upcase
+        teacher_continue = false if user_decision == "N"
+      else
+        puts "INVALID INPUT"
+      end
+    end
   when 5
+
     #If the user wants to EXIT
     continue = false
   end

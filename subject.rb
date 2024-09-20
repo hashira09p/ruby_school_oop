@@ -1,5 +1,5 @@
 class Subject
-  attr_accessor :id, :name
+  attr_accessor :id, :name, :delete_at
 
   @@records = []
 

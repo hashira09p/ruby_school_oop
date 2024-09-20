@@ -1,5 +1,5 @@
 class Students
-  attr_accessor :id, :name, :birth_date, :email, :phone_number
+  attr_accessor :id, :name, :birth_date, :email, :phone_number, :deleted_at
 
   @@records = []
 
