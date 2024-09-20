@@ -3,6 +3,9 @@ class Students
 
   @@records = []
 
+  def initialize
+    @deleted_at = deleted_at = nil
+  end
   def save
     @@records.append(self)
   end
@@ -13,7 +16,7 @@ class Students
 
   def self.destroy_only_one(id)
     found_student = Students.find_by_id(id)
-    @@records.delete(found_student)
+    Students.delete_at = Time.now if found_student
   end
 
   def display
