@@ -1,23 +1,34 @@
 class Subject
-  attr_accessor :id, :name, :delete_at
+  attr_accessor :id, :name, :deleted_at
 
-  @@records = []
+  def initialize(id = nil, name = nil, deleted_at = nil)
+    @id = id
+    @name = name
+    @deleted_at = deleted_at
+   end
+   
+  @@records = [
+    Subject.new(1, "Math"),
+    Subject.new(2, "English")
+  ]
 
   def save
-    @@records.prepend(self)
+    @@records.append(self)
   end
 
-  def self.destroy_only_one(id)
-    found_student = Subject.find_by_id(id)
-    @@records.delete(found_student)
+  def self.destroy(id)
+    found_subject = Subject.find_by_id(id)
+    found_subject.deleted_at = Time.now if found_subject
+  end
+
+  def self.all
+    @@records.select do |record|
+      !record.deleted_at
+    end
   end
 
   def display
     "ID: #{id}, Name: #{name}"
-  end
-
-  def self.all
-    @@records
   end
 
   def self.find_by_id(id_input)

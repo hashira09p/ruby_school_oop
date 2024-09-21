@@ -1,24 +1,34 @@
 class Course
-  attr_accessor :id, :name, :delete_at
+  attr_accessor :id, :name, :deleted_at
 
-  @@records = []
+  def initialize(id= nil, name = nil, deleted_at = nil)
+    @id = id
+    @name = name
+  
+   end
+
+  @@records = [
+    Course.new(1,"BSCPE"),
+    Course.new(2,"BSIT")
+  ]
 
   def save
-    @@records.prepend(self)
+    @@records.append(self)
   end
 
-  def self.destroy_only_one(id)
-    found_student = Course.find_by_id(id)
-    @@records.delete(found_student)
+  def self.destroy(id)
+    found_course = Course.find_by_id(id)
+    found_course.deleted_at = Time.now if found_course
   end
-
 
   def self.all
-    @@records
+    @@records.select do |record|
+      !record.deleted_at
+    end
   end
 
   def display
-    "ID: #{id}, Name: #{name}"
+    "ID: #{id}, Course: #{name}"
   end
 
   def self.find_by_id(id_input)

@@ -1,7 +1,7 @@
 class Student
   attr_accessor :id, :name, :birth_date, :email, :phone_number, :deleted_at
 
-  def initialize(id= nil, name = nil, birth_date = nil, email = nil, phone_number = nil, deleted_at = nil)
+  def initialize(id = nil, name = nil, birth_date = nil, email = nil, phone_number = nil, deleted_at = nil)
    @id = id
    @name = name
    @birth_date = birth_date
@@ -16,7 +16,7 @@ class Student
   ]
 
   def save
-    @@records.prepend(self)
+    @@records.append(self)
   end
 
   def self.destroy(id)
