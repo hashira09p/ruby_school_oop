@@ -4,7 +4,7 @@ class Course
   @@records = []
 
   def save
-    @@records.append(self)
+    @@records.prepend(self)
   end
 
   def self.destroy_only_one(id)

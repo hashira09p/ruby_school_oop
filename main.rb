@@ -1,48 +1,53 @@
-require_relative 'students'
+require_relative 'student'
 require_relative 'course'
 require_relative 'subject'
 require_relative 'teacher'
 
-student_id = 1
+student_id = 3
 course_id = 1
 subject_id = 1
 teacher_id = 1
 
 #STUDENT MANAGEMENT
 def add(id_number)
-  new_student = Students.new
+  new_student = Student.new
   new_student.id = id_number
+
   puts "Please input a name"
   new_student.name = gets.chomp
+
   puts "Please input birthday"
   new_student.birth_date = gets.chomp
+  
   puts "Please input email"
   new_student.email = gets.chomp
+
   puts "Please input phone number"
   new_student.phone_number = gets.chomp.to_i
   new_student.save
 
   puts "Student added successfully!"
-  Students.all.each do |element|
+  Student.all.each do |element|
     puts element.display
   end
 end
 
 def delete
   puts "Please input an ID that You want to delete"
-  delete_student = Students.new
+  delete_student = Student.new
   delete_student.id = gets.chomp.to_i
 
-  found = Students.find_by_id(delete_student.id)
+  found = Student.find_by_id(delete_student.id)
   failed = "Can't Find the ID" unless found
 
   if found
-    Students.destroy_only_one(delete_student.id)
+    Student.destroy(delete_student.id)
     puts "Student destroyed successfully!"
     puts " "
     puts "These are now the updated list now."
-    Students.all.each do |element|
-      puts element.display
+
+    Student.all.each do |element|
+     puts element.display
     end
   else
     puts failed
@@ -197,7 +202,7 @@ while continue
         user_decision = gets.chomp.upcase
         student_continue = false if user_decision == "N"
       when 3
-        Students.all.each do |element|
+        Student.all.each do |element|
           puts element.display
         end
         puts "Do You want to continue? Y/N"

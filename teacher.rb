@@ -2,7 +2,7 @@ class Teacher
   attr_accessor :id, :name, :birth_date, :email, :phone_number, :department, :delete_at
 
   def save
-    @@records.append(self)
+    @@records.prepend(self)
   end
 
   def destroy_all
