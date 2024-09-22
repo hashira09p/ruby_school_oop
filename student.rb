@@ -1,12 +1,13 @@
 class Student
-  attr_accessor :id, :name, :birth_date, :email, :phone_number, :deleted_at
+  attr_accessor :id, :name, :birth_date, :email, :phone_number, :course_id, :deleted_at
 
-  def initialize(id = nil, name = nil, birth_date = nil, email = nil, phone_number = nil, deleted_at = nil)
+  def initialize(id = nil, name = nil, birth_date = nil, email = nil, phone_number = nil, course_id = nil, deleted_at = nil)
    @id = id
    @name = name
    @birth_date = birth_date
    @email = email
    @phone_number = phone_number
+   @course_id = course_id
    @deleted_at = deleted_at
   end
 
@@ -25,7 +26,7 @@ class Student
   end
 
   def display
-    "ID: #{id}, Name: #{name}, Birthdate: #{birth_date}, Email: #{email}, Phone: #{phone_number} "
+    "ID: #{id}, Name: #{name}, Birthdate: #{birth_date}, Email: #{email}, Phone: #{phone_number}, Course: #{course_id}"
   end
 
   def self.all

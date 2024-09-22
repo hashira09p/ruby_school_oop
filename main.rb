@@ -24,6 +24,18 @@ def add(id_number)
 
   puts "Please input phone number"
   new_student.phone_number = gets.chomp.to_i
+
+  puts "These are available courses. Please choose one"
+  Course.all.each do |element|
+    puts element.display
+  end
+
+  puts "Please input the ID of the course you want"
+  new_student.course_id = gets.chomp.to_i
+
+  course_found = Course.find_by_id(new_student.course_id)
+  new_student.course_id = course_found.name
+
   new_student.save
 
   puts "Student added successfully!"
