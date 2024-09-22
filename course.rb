@@ -1,5 +1,5 @@
 class Course
-  attr_accessor :id, :name, :deleted_at
+  attr_accessor :id, :name, :deleted_at, :course_id
 
   def initialize(id= nil, name = nil, deleted_at = nil)
     @id = id
@@ -9,7 +9,9 @@ class Course
 
   @@records = [
     Course.new(1,"BSCPE"),
-    Course.new(2,"BSIT")
+    Course.new(2,"BSIT"),
+    Course.new(3,"BSCS"),
+    Course.new(4,"BSED")
   ]
 
   def save

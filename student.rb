@@ -12,8 +12,8 @@ class Student
   end
 
   @@records = [
-    Student.new(1, "Jerome", "April 23", "jerome@gmail.com", "0917802234"),
-    Student.new(2, "John", "April 21", "johndoe@gmail.com", "09123322234"),
+    Student.new(1, "Jerome", "April 23", "jerome@gmail.com", "0917802234", "BSCS"),
+    Student.new(2, "John", "April 21", "johndoe@gmail.com", "09123322234", "BSED"),
   ]
 
   def save

@@ -21,7 +21,7 @@ class Teacher
 
   def self.destroy(id)
     found_teacher = Teacher.find_by_id(id)
-    @@records.delete(found_teacher)
+    found_teacher.deleted_at = Time.now if found_teacher
   end
 
   def self.all

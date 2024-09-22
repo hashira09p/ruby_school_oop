@@ -8,8 +8,10 @@ class Subject
    end
    
   @@records = [
-    Subject.new(1, "Math"),
-    Subject.new(2, "English")
+    Subject.new(1, "Cybersecurity"),
+    Subject.new(2, "Computer Programming"),
+    Subject.new(3, "Statistics"),
+    Subject.new(4, "Art Appreciation")
   ]
 
   def save

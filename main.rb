@@ -2,11 +2,13 @@ require_relative 'student'
 require_relative 'course'
 require_relative 'subject'
 require_relative 'teacher'
+require_relative 'course_subject'
 
-student_id = 3
-course_id = 3
-subject_id = 3
-teacher_id = 3
+student_id = Student.all.size + 1
+course_id = Course.all.size + 1
+subject_id = Subject.all.size + 1
+teacher_id = Teacher.all.size + 1
+
 
 #STUDENT MANAGEMENT
 def add(id_number)
@@ -144,6 +146,57 @@ def update_course
   end
 end
 
+def display_courses
+  puts "These are the available courses"
+  Course.all.each do |element|
+    puts element.display
+  end
+
+  puts "Do you want to add a subjects in the specific course? Y/N"
+  user_answer = gets.chomp.upcase
+
+  want_to_continue = true
+
+  while want_to_continue
+    if user_answer == "Y"
+      add_subjects_in_course
+      puts "Want to continue? Y or N"
+      decision = gets.chomp.upcase
+      want_to_continue = false if decision == "N"
+    else
+      want_to_continue = false
+    end
+  end
+
+end
+
+def add_subjects_in_course
+  course_subject_id = CourseSubject.all.size + 1
+
+  puts "Please input the id of a course that you want to add a subject"
+  Course.all.each do |element|
+    puts element.display
+  end
+  
+  choosen_course_id = gets.chomp.to_i
+  found_course = Course.find_by_id(choosen_course_id)
+
+  puts "Please input the id subject you want to add in that course"
+  Subject.all.each do |element|
+    puts element.display
+  end
+
+  choosen_subject_id = gets.chomp.to_i
+  found_subject = Subject.find_by_id(choosen_subject_id)
+
+  course_subject = CourseSubject.new(course_subject_id, found_course.id, found_subject.id)
+  course_subject.save
+  
+
+  CourseSubject.all.each do |element|
+    puts element.display
+  end
+end
 
 #SUBJECT MANAGEMENT
 def add_subject(id_number)
@@ -228,7 +281,7 @@ def delete_teacher
   failed = "Can't Find the ID" unless found
 
   if found
-    Teacher.destroy_only_one(delete_teacher.id)
+    Teacher.destroy(delete_teacher.id)
     puts "Teacher destroyed successfully!"
     puts " "
     puts "These are now the updated list now."
@@ -296,27 +349,27 @@ while continue
       case action
       when 1
         add(student_id)
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_id += 1 if user_decision == "Y"
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_id += 1 if user_decision == 1
+        student_continue = false if user_decision == 2
       when 2
         delete
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
       when 3
         update_student
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
       when 4
         Student.all.each do |element|
           puts element.display
         end
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
       else
         puts "INVALID INPUT"
       end
@@ -331,33 +384,31 @@ while continue
       puts "[1] ADD A NEW COURSE"
       puts "[2] DELETE A COURSE"
       puts "[3] UPDATE STUDENT"
-      puts "[4] SHOW ALL THE COURSE"
+      puts "[4] SHOW ALL THE COURSE and ADD or REMOVE SUBJECTS in COURSES"
       action = gets.chomp.to_i
 
       case action
       when 1
         add_course(course_id)
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        course_id += 1 if user_decision == "Y"
-        course_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        course_id += 1 if user_decision == 1
+        course_continue = false if user_decision == 2
       when 2
         delete_course
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        course_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        course_continue = false if user_decision == 2
       when 3
         update_course
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
       when 4
-        Course.all.each do |element|
-          puts element.display
-        end
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        course_continue = false if user_decision == "N"
+        display_courses
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        course_continue = false if user_decision == 2
       else
         puts "INVALID INPUT"
       end
@@ -377,27 +428,27 @@ while continue
       case action
       when 1
         add_subject(subject_id)
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        subject_id += 1 if user_decision == "Y"
-        subject_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        subject_id += 1 if user_decision == 1
+        subject_continue = false if user_decision == 2
       when 2
         delete_subject
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        subject_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        subject_continue = false if user_decision == 2
       when 3
         update_subject
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
       when 4
         Subject.all.each do |element|
           puts element.display
         end
-        puts "Do You want to continue or go back to managements section? Y/N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.upcase
-        subject_continue = false if user_decision == "N"
+        subject_continue = false if user_decision == 2
       else
         puts "INVALID INPUT"
       end
@@ -417,27 +468,27 @@ while continue
       case action
       when 1
         add(teacher_id)
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        teacher_id += 1 if user_decision == "Y"
-        teacher_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        teacher_id += 1 if user_decision == 1
+        teacher_continue = false if user_decision == 2
       when 2
-        delete teacher
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        teacher_continue = false if user_decision == "N"
+        delete_teacher
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        teacher_continue = false if user_decision == 2
       when 3
         update_teacher
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        student_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
       when 4
         Teacher.all.each do |element|
           puts element.display
         end
-        puts "Do You want to continue or go back to managements section? Y/N"
-        user_decision = gets.chomp.upcase
-        teacher_continue = false if user_decision == "N"
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        teacher_continue = false if user_decision == 2
       else
         puts "INVALID INPUT"
       end
