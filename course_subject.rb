@@ -10,7 +10,11 @@ class CourseSubject
   @@records = [
     CourseSubject.new(1 , "BSIT", "Software engineering"),
     CourseSubject.new(2, "BSCPE", "Programming Logic and Design"),
-    CourseSubject.new(3, "BSED", "Assessment of student learning")
+    CourseSubject.new(3, "BSED", "Assessment of student learning"),
+    CourseSubject.new(4, "BSED", "Art Appreciation"),
+    CourseSubject.new(5, "BSCPE", "Computer engineering Drafting and design"),
+    CourseSubject.new(6, "BSIT", "Databases"),
+    CourseSubject.new(7, "BSIT", "Cybersecurity")
   ]
 
   def save
@@ -27,6 +31,9 @@ class CourseSubject
     puts "SUBJECT: #{subject_id}"
   end
 
+  def all
+    @@records
+  end
   def self.all
     @@records
   end

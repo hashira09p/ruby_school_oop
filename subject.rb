@@ -8,10 +8,13 @@ class Subject
    end
    
   @@records = [
-    Subject.new(1, "Cybersecurity"),
-    Subject.new(2, "Computer Programming"),
-    Subject.new(3, "Statistics"),
-    Subject.new(4, "Art Appreciation")
+    Subject.new(1, "Software engineering"),
+    Subject.new(2, "Programming Logic and Design"),
+    Subject.new(3, "Assessment of student learning"),
+    Subject.new(4, "Art Appreciation"),
+    Subject.new(5, "Computer engineering Drafting and design"),
+    Subject.new(6, "Databases"),
+    Subject.new(7, "Cybersecurity")
   ]
 
   def save

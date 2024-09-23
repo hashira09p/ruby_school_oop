@@ -1,5 +1,7 @@
+require_relative 'student'
+require_relative 'course_subject'
 class Course
-  attr_accessor :id, :name, :deleted_at, :course_id
+  attr_accessor :id, :name, :deleted_at
 
   def initialize(id= nil, name = nil, deleted_at = nil)
     @id = id
@@ -35,6 +37,14 @@ class Course
 
   def self.find_by_id(id_input)
     @@records.find{|element| element.id == id_input}
+  end
+
+  def self.students(course_name)
+    Student.all.select{|element| element.course_id == course_name}
+  end
+
+  def self.subjects(subject_name)
+    CourseSubject.all.select{|element| element.course_id == subject_name}
   end
 end
 

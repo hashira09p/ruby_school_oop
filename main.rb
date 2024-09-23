@@ -188,6 +188,42 @@ def display_courses
   system("Clear") || system("cls")
 end
 
+def show_students_on_specific_course
+  system("Clear") || system("cls")
+  puts "These are the available courses"
+  Course.all.each do |element|
+    puts element.display
+  end
+
+  puts "Please input the course ID that you want to show all students in that course."
+  id = gets.chomp.to_i
+  system("Clear") || system("cls")
+  course_found = Course.find_by_id(id)
+  students_found= Course.students(course_found.name)
+
+  students_found.each do |element|
+    puts element.display
+  end
+end
+
+def show_subjects_on_specific_course
+  system("Clear") || system("cls")
+  puts "These are the available courses"
+  Course.all.each do |element|
+    puts element.display
+  end
+
+  puts "Please input the course ID that you want to show all subjects in that course."
+  id = gets.chomp.to_i
+  system("Clear") || system("cls")
+  course_found = Course.find_by_id(id)
+  subjects_found= Course.subjects(course_found.name)
+
+  subjects_found.each do |element|
+    puts element.display
+  end
+end
+
 def add_subjects_in_course
   system("Clear") || system("cls")
   course_subject_id = CourseSubject.all.size + 1
@@ -444,6 +480,8 @@ while continue
       puts "[2] DELETE A COURSE"
       puts "[3] UPDATE STUDENT"
       puts "[4] SHOW ALL THE COURSE and ADD or REMOVE SUBJECTS in COURSES"
+      puts "[5] SHOW ALL THE STUDENTS ON THE SPECIFIC COURSE"
+      puts "[6] SHOW ALL THE SUBJECTS ON THE SPECIFIC COURSE"
       action = gets.chomp.to_i
 
       case action
@@ -472,6 +510,20 @@ while continue
       when 4
         system("Clear") || system("cls")
         display_courses
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        course_continue = false if user_decision == 2
+        system("Clear") || system("cls")
+      when 5
+        system("Clear") || system("cls")
+        show_students_on_specific_course
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        course_continue = false if user_decision == 2
+        system("Clear") || system("cls")
+      when 6
+        system("Clear") || system("cls")
+        show_subjects_on_specific_course
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         course_continue = false if user_decision == 2

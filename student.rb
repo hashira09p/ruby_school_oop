@@ -33,6 +33,9 @@ class Student
     "ID: #{id}, Name: #{name}, Birthdate: #{birth_date}, Email: #{email}, Phone: #{phone_number}, Course: #{course_id}"
   end
 
+  def all
+    @@records
+  end
   def self.all
     @@records.select do |record|
       !record.deleted_at
@@ -43,7 +46,4 @@ class Student
     @@records.find{|element| element.id == id_input}
   end
 
-  def students(course)
-    @@records.find{|element| element.course_id == course}
-  end
 end
