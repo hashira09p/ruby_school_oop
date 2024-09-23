@@ -46,4 +46,8 @@ class Student
     @@records.find{|element| element.id == id_input}
   end
 
+  def students
+
+  end
+
 end

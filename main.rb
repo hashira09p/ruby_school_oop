@@ -3,6 +3,7 @@ require_relative 'course'
 require_relative 'subject'
 require_relative 'teacher'
 require_relative 'course_subject'
+require_relative 'student_subject'
 
 student_id = Student.all.size + 1
 course_id = Course.all.size + 1
@@ -46,7 +47,16 @@ def add(id_number)
   Student.all.each do |element|
     puts element.display
   end
+
+  course_subject_found = CourseSubject.find_by_course_name(course_found.name)
+  course_subject_found.each do |element|
+    student_subject_id = StudentSubject.all.size + 1
+    new_student_subject = StudentSubject.new(student_subject_id, new_student.name, element.subject_id)
+    puts new_student_subject.display
+  end
+
 end
+
 
 def delete
   system("Clear") || system("cls")
