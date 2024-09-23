@@ -12,6 +12,7 @@ teacher_id = Teacher.all.size + 1
 
 #STUDENT MANAGEMENT
 def add(id_number)
+  system("Clear") || system("cls")
   new_student = Student.new
   new_student.id = id_number
 
@@ -34,6 +35,7 @@ def add(id_number)
 
   puts "Please input the ID of the course you want"
   new_student.course_id = gets.chomp.to_i
+  system("Clear") || system("cls")
 
   course_found = Course.find_by_id(new_student.course_id)
   new_student.course_id = course_found.name
@@ -47,6 +49,7 @@ def add(id_number)
 end
 
 def delete
+  system("Clear") || system("cls")
   puts "Please input an ID that You want to delete"
   delete_student = Student.new
   delete_student.id = gets.chomp.to_i
@@ -69,6 +72,7 @@ def delete
 end
 
 def update_student
+  system("Clear") || system("cls")
   puts "Please input an ID that you want to update"
   id_input = gets.chomp.to_i
   student_data = Student.find_by_id(id_input)
@@ -87,6 +91,7 @@ def update_student
     puts "Please input an new phone number"
     student_data.phone_number = gets.chomp
 
+    system("Clear") || system("cls")
     puts "Updated Successfully!"
     puts student_data.display
   else
@@ -96,6 +101,7 @@ end
 
 #COURSE MANAGEMENT
 def add_course(id_number)
+  system("Clear") || system("cls")
   new_course = Course.new
   new_course.id = id_number
   puts "Please input a course"
@@ -109,6 +115,7 @@ def add_course(id_number)
 end
 
 def delete_course
+  system("Clear") || system("cls")
   puts "Please input an ID that You want to delete"
   delete_course = Course.new
   delete_course.id = gets.chomp.to_i
@@ -130,6 +137,7 @@ def delete_course
 end
 
 def update_course
+  system("Clear") || system("cls")
   puts "Please input an ID that you want to update"
   id_input = gets.chomp.to_i
   course_data = Course.find_by_id(id_input)
@@ -139,6 +147,7 @@ def update_course
     puts "Please input an new course"
     course_data.name = gets.chomp
 
+    system("Clear") || system("cls")
     puts "Updated Successfully!"
     puts course_data.display
   else
@@ -147,6 +156,7 @@ def update_course
 end
 
 def display_courses
+  system("Clear") || system("cls")
   puts "These are the available courses"
   Course.all.each do |element|
     puts element.display
@@ -154,6 +164,7 @@ def display_courses
 
   puts "Do you want to add a subjects in the specific course? Y/N"
   user_answer = gets.chomp.upcase
+  system("Clear") || system("cls")
 
   want_to_continue = true
 
@@ -163,36 +174,44 @@ def display_courses
       puts "Want to continue? Y or N"
       decision = gets.chomp.upcase
       want_to_continue = false if decision == "N"
+      system("Clear") || system("cls")
     else
+      puts "Invalid input or You press 'N'"
       want_to_continue = false
     end
   end
+  system("Clear") || system("cls")
 
 end
 
 def add_subjects_in_course
+  system("Clear") || system("cls")
   course_subject_id = CourseSubject.all.size + 1
 
   puts "Please input the id of a course that you want to add a subject"
   Course.all.each do |element|
     puts element.display
   end
-  
+
+  print "Please input the course id: "
   choosen_course_id = gets.chomp.to_i
   found_course = Course.find_by_id(choosen_course_id)
+  system("Clear") || system("cls")
 
   puts "Please input the id subject you want to add in that course"
   Subject.all.each do |element|
     puts element.display
   end
 
+  print "Please input the subject id: "
   choosen_subject_id = gets.chomp.to_i
   found_subject = Subject.find_by_id(choosen_subject_id)
+  system("Clear") || system("cls")
 
-  course_subject = CourseSubject.new(course_subject_id, found_course.id, found_subject.id)
+  course_subject = CourseSubject.new(course_subject_id, found_course.name, found_subject.name)
   course_subject.save
   
-
+  puts "Successfully added!"
   CourseSubject.all.each do |element|
     puts element.display
   end
@@ -200,6 +219,7 @@ end
 
 #SUBJECT MANAGEMENT
 def add_subject(id_number)
+  system("Clear") || system("cls")
   new_subject = Subject.new
   new_subject.id = id_number
   puts "Please input a subject"
@@ -213,6 +233,7 @@ def add_subject(id_number)
 end
 
 def delete_subject
+  system("Clear") || system("cls")
   puts "Please input an ID that You want to delete"
   delete_subject = Subject.new
   delete_subject.id = gets.chomp.to_i
@@ -234,6 +255,7 @@ def delete_subject
 end
 
 def update_subject
+  system("Clear") || system("cls")
   puts "Please input an ID that you want to update"
   id_input = gets.chomp.to_i
   subject_data = Subject.find_by_id(id_input)
@@ -243,6 +265,7 @@ def update_subject
     puts "Please input an new course"
     subject_data.name = gets.chomp
 
+    system("Clear") || system("cls")
     puts "Updated Successfully!"
     puts subject_data.display
   else
@@ -252,6 +275,7 @@ end
 
 #TEACHER MANAGEMENT
 def add_teacher(id_number)
+  system("Clear") || system("cls")
   new_teacher = Teacher.new
   new_teacher.id = id_number
   puts "Please input a name"
@@ -273,6 +297,7 @@ def add_teacher(id_number)
 end
 
 def delete_teacher
+  system("Clear") || system("cls")
   puts "Please input an ID that You want to delete"
   delete_teacher = Teacher.new
   delete_teacher.id = gets.chomp.to_i
@@ -294,6 +319,7 @@ def delete_teacher
 end
 
 def update_teacher
+  system("Clear") || system("cls")
   puts "Please input an ID that you want to update"
   id_input = gets.chomp.to_i
   teacher_data = Teacher.find_by_id(id_input)
@@ -315,6 +341,7 @@ def update_teacher
     puts "Please input an new department"
     teacher_data.department = gets.chomp
 
+    system("Clear") || system("cls")
     puts "Updated Successfully!"
     puts teacher_data.display
   else
@@ -339,6 +366,7 @@ while continue
     #If the user choose the STUDENT MANAGEMENT
     student_continue = true
     while student_continue
+      system("Clear") || system("cls")
       puts "Please input "
       puts "[1] ADD A NEW STUDENT"
       puts "[2] DELETE A STUDENT"
@@ -348,22 +376,30 @@ while continue
 
       case action
       when 1
+        system("Clear") || system("cls")
         add(student_id)
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         student_id += 1 if user_decision == 1
         student_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 2
+        system("Clear") || system("cls")
         delete
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         student_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 3
+        system("Clear") || system("cls")
         update_student
+        system("Clear") || system("cls")
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         student_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 4
+        system("Clear") || system("cls")
         Student.all.each do |element|
           puts element.display
         end
@@ -380,6 +416,7 @@ while continue
     #If the user choose the COURSE MANAGEMENT
     course_continue = true
     while course_continue
+      system("Clear") || system("cls")
       puts "Please input "
       puts "[1] ADD A NEW COURSE"
       puts "[2] DELETE A COURSE"
@@ -389,26 +426,34 @@ while continue
 
       case action
       when 1
+        system("Clear") || system("cls")
         add_course(course_id)
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         course_id += 1 if user_decision == 1
         course_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 2
+        system("Clear") || system("cls")
         delete_course
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         course_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 3
+        system("Clear") || system("cls")
         update_course
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
-        student_continue = false if user_decision == 2
+        course_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 4
+        system("Clear") || system("cls")
         display_courses
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         course_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       else
         puts "INVALID INPUT"
       end
@@ -418,6 +463,7 @@ while continue
     #If the user choose the SUBJECT MANAGEMENT
     subject_continue = true
     while subject_continue
+      system("Clear") || system("cls")
       puts "Please input "
       puts "[1] ADD A NEW SUBJECT"
       puts "[2] DELETE A SUBJECT"
@@ -427,28 +473,36 @@ while continue
 
       case action
       when 1
+        system("Clear") || system("cls")
         add_subject(subject_id)
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         subject_id += 1 if user_decision == 1
         subject_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 2
+        system("Clear") || system("cls")
         delete_subject
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         subject_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 3
+        system("Clear") || system("cls")
         update_subject
+        system("Clear") || system("cls")
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
-        student_continue = false if user_decision == 2
+        subject_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 4
         Subject.all.each do |element|
           puts element.display
         end
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
-        user_decision = gets.chomp.upcase
+        user_decision = gets.chomp.to_i
         subject_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       else
         puts "INVALID INPUT"
       end
@@ -458,6 +512,7 @@ while continue
     #If the user choose TEACHER MANAGEMENT
     teacher_continue = true
     while teacher_continue
+      system("Clear") || system("cls")
       puts "Please input "
       puts "[1] ADD A NEW TEACHER"
       puts "[2] DELETE A TEACHER"
@@ -467,21 +522,27 @@ while continue
 
       case action
       when 1
+        system("Clear") || system("cls")
         add(teacher_id)
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         teacher_id += 1 if user_decision == 1
         teacher_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 2
+        system("Clear") || system("cls")
         delete_teacher
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         teacher_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 3
+        system("Clear") || system("cls")
         update_teacher
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
-        student_continue = false if user_decision == 2
+        teacher_continue = false if user_decision == 2
+        system("Clear") || system("cls")
       when 4
         Teacher.all.each do |element|
           puts element.display
@@ -497,6 +558,7 @@ while continue
 
     #If the user wants to EXIT
     continue = false
+    system("Clear") || system("cls")
   end
 
 end
