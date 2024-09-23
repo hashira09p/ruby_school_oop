@@ -7,7 +7,11 @@ class CourseSubject
     @subject_id = subject_id
   end
 
-  @@records = []
+  @@records = [
+    CourseSubject.new(1 , "BSIT", "Software engineering"),
+    CourseSubject.new(2, "BSCPE", "Programming Logic and Design"),
+    CourseSubject.new(3, "BSED", "Assessment of student learning")
+  ]
 
   def save
     @@records.append(self)
@@ -27,7 +31,7 @@ class CourseSubject
     @@records
   end
 
-  def find_by_id(id_input)
+  def self.find_by_id(id_input)
     @@records.find{|element| element.id == id_input}
   end
 end

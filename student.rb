@@ -14,6 +14,10 @@ class Student
   @@records = [
     Student.new(1, "Jerome", "April 23", "jerome@gmail.com", "0917802234", "BSCS"),
     Student.new(2, "John", "April 21", "johndoe@gmail.com", "09123322234", "BSED"),
+    Student.new(3, "Jane", "April 23", "jane@gmail.com", "0934567283682", "BSIT"),
+    Student.new(4, "Josh", "May 13", "joshie@gmail.com", "0934567283123", "BSCPE"),
+    Student.new(5, "Jas", "March 23", "jas@gmail.com", "0934567283682", "BSIT"),
+    Student.new(6, "AJ", "November 13", "aj@gmail.com", "0973648589692", "BSCPE")
   ]
 
   def save
@@ -37,5 +41,9 @@ class Student
 
   def self.find_by_id(id_input)
     @@records.find{|element| element.id == id_input}
+  end
+
+  def students(course)
+    @@records.find{|element| element.course_id == course}
   end
 end

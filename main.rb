@@ -162,26 +162,30 @@ def display_courses
     puts element.display
   end
 
-  puts "Do you want to add a subjects in the specific course? Y/N"
-  user_answer = gets.chomp.upcase
+  puts "[1] ADD SUBJECTS TO COURSE"
+  puts "[2] remove SUBJECTS TO COURSE"
+  user_answer = gets.chomp.to_i
   system("Clear") || system("cls")
 
   want_to_continue = true
 
   while want_to_continue
-    if user_answer == "Y"
+    case user_answer
+    when 1
       add_subjects_in_course
       puts "Want to continue? Y or N"
       decision = gets.chomp.upcase
       want_to_continue = false if decision == "N"
       system("Clear") || system("cls")
-    else
-      puts "Invalid input or You press 'N'"
-      want_to_continue = false
+    when 2
+      remove_subjects_in_course
+      puts "Want to continue? Y or N"
+      decision = gets.chomp.upcase
+      want_to_continue = false if decision == "N"
+      system("Clear") || system("cls")
     end
   end
   system("Clear") || system("cls")
-
 end
 
 def add_subjects_in_course
@@ -215,6 +219,24 @@ def add_subjects_in_course
   CourseSubject.all.each do |element|
     puts element.display
   end
+end
+
+def remove_subjects_in_course
+  puts "These are in the course subject records"
+  CourseSubject.all.each do |element|
+    element.display
+  end
+
+  print "Please input the id that you want to remove in course subject: "
+  id = gets.chomp.to_i
+  course_subject_found = CourseSubject.find_by_id(id)
+  course_subject_found.destroy
+  system("Clear") || system("cls")
+
+  CourseSubject.all.each do |element|
+    puts element.display
+  end
+
 end
 
 #SUBJECT MANAGEMENT
