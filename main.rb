@@ -118,7 +118,6 @@ def show_enrolled_subjects
   puts "Please input your student id"
   student_id = gets.chomp.to_i
 
-  system("Clear") || system("cls")
   puts "These are your subjects"
   records = StudentSubject.all
   records.each do |element|
@@ -490,7 +489,6 @@ while continue
       when 4
         system("Clear") || system("cls")
         show_enrolled_subjects
-        system("Clear") || system("cls")
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         student_continue = false if user_decision == 2
