@@ -3,7 +3,7 @@ require_relative 'course'
 require_relative 'subject'
 require_relative 'teacher'
 require_relative 'course_subject'
-require_relative 'student_subject'
+
 
 student_id = Student.all.size + 1
 course_id = Course.all.size + 1
@@ -48,10 +48,15 @@ def add(id_number)
     puts element.display
   end
 
+  puts " " #JUST TO HAVE A WHITESPACE
+  puts " " #JUST TO HAVE A WHITESPACE
+
+  student_subject_id = StudentSubject.all.size
+  student_subject_id += 1
   course_subject_found = CourseSubject.find_by_course_name(course_found.name)
   course_subject_found.each do |element|
-    student_subject_id = StudentSubject.all.size + 1
     new_student_subject = StudentSubject.new(student_subject_id, new_student.name, element.subject_id)
+    new_student_subject.save
     puts new_student_subject.display
   end
 
@@ -109,6 +114,27 @@ def update_student
   end
 end
 
+def show_enrolled_subjects
+  system("Clear") || system("cls")
+  puts "Please input your student id"
+  student_id = gets.chomp.to_i
+
+  subject_found = Student.students(student_id)
+
+  puts subject_found
+=begin
+  puts "This are your subjects"
+  if subject_found.length > 1
+    subject_found.each do |subject|
+
+      puts subject.subject_id
+    end
+  else
+    puts subject.subject_id
+  end
+=end
+
+end
 #COURSE MANAGEMENT
 def add_course(id_number)
   system("Clear") || system("cls")
@@ -436,10 +462,11 @@ while continue
     while student_continue
       system("Clear") || system("cls")
       puts "Please input "
-      puts "[1] ADD A NEW STUDENT"
+      puts "[1] ENROLL A NEW STUDENT"
       puts "[2] DELETE A STUDENT"
       puts "[3] UPDATE STUDENT"
-      puts "[4] SHOW ALL THE STUDENTS"
+      puts "[4] SHOW YOUR ENROLLED SUBJECT"
+      puts "[5] SHOW ALL THE STUDENTS"
       action = gets.chomp.to_i
 
       case action
@@ -467,6 +494,14 @@ while continue
         student_continue = false if user_decision == 2
         system("Clear") || system("cls")
       when 4
+        system("Clear") || system("cls")
+        show_enrolled_subjects
+        system("Clear") || system("cls")
+        puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
+        user_decision = gets.chomp.to_i
+        student_continue = false if user_decision == 2
+        system("Clear") || system("cls")
+      when 5
         system("Clear") || system("cls")
         Student.all.each do |element|
           puts element.display

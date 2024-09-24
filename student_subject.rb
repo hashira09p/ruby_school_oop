@@ -8,12 +8,12 @@ class StudentSubject
   end
 
   @@records = [
-    CourseSubject.new(1, "Jerome", "Software engineering"),
-    CourseSubject.new(2, "John",  "Art Appreciation"),
-    CourseSubject.new(3, "Jane",  "Databases"),
-    CourseSubject.new(4, "Josh",  "Computer engineering Drafting and design"),
-    CourseSubject.new(5, "Jas",  "Cybersecurity"),
-    CourseSubject.new(6, "AJ",  "Programming Logic and Design")
+    StudentSubject.new(1, "Jerome", "Software engineering"),
+    StudentSubject.new(2, "John",  "Art Appreciation"),
+    StudentSubject.new(3, "Jane",  "Databases"),
+    StudentSubject.new(4, "Josh",  "Computer engineering Drafting and design"),
+    StudentSubject.new(5, "Jas",  "Cybersecurity"),
+    StudentSubject.new(6, "AJ",  "Programming Logic and Design")
   ]
 
   def save
@@ -32,6 +32,14 @@ class StudentSubject
 
   def self.all
     @@records
+  end
+
+  def self.find_by_id(id_input)
+    @@records.each do |element|
+      if element.id == id_input
+        element.subject_id
+      end
+    end
   end
 
   def self.find_by_id(id_input)

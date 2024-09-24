@@ -1,3 +1,4 @@
+require_relative 'student_subject'
 class Student
   attr_accessor :id, :name, :birth_date, :email, :phone_number, :course_id, :deleted_at
 
@@ -46,8 +47,9 @@ class Student
     @@records.find{|element| element.id == id_input}
   end
 
-  def students
-
+  def self.students(id_input)
+    subject_of_students = StudentSubject.find_by_id(id_input)
+    subject_of_students
   end
 
 end
