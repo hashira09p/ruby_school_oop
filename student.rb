@@ -47,9 +47,5 @@ class Student
     @@records.find{|element| element.id == id_input}
   end
 
-  def self.students(id_input)
-    subject_of_students = StudentSubject.find_by_id(id_input)
-    subject_of_students
-  end
 
 end

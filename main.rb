@@ -51,11 +51,10 @@ def add(id_number)
   puts " " #JUST TO HAVE A WHITESPACE
   puts " " #JUST TO HAVE A WHITESPACE
 
-  student_subject_id = StudentSubject.all.size
-  student_subject_id += 1
+
   course_subject_found = CourseSubject.find_by_course_name(course_found.name)
   course_subject_found.each do |element|
-    new_student_subject = StudentSubject.new(student_subject_id, new_student.name, element.subject_id)
+    new_student_subject = StudentSubject.new(id_number, new_student.name, element.subject_id)
     new_student_subject.save
     puts new_student_subject.display
   end
@@ -119,20 +118,14 @@ def show_enrolled_subjects
   puts "Please input your student id"
   student_id = gets.chomp.to_i
 
-  subject_found = Student.students(student_id)
-
-  puts subject_found
-=begin
-  puts "This are your subjects"
-  if subject_found.length > 1
-    subject_found.each do |subject|
-
-      puts subject.subject_id
+  system("Clear") || system("cls")
+  puts "These are your subjects"
+  records = StudentSubject.all
+  records.each do |element|
+    if element.id == student_id
+      puts element.subject_id
     end
-  else
-    puts subject.subject_id
   end
-=end
 
 end
 #COURSE MANAGEMENT
@@ -467,6 +460,7 @@ while continue
       puts "[3] UPDATE STUDENT"
       puts "[4] SHOW YOUR ENROLLED SUBJECT"
       puts "[5] SHOW ALL THE STUDENTS"
+      puts "[6] GO BACK"
       action = gets.chomp.to_i
 
       case action
@@ -509,6 +503,8 @@ while continue
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         student_continue = false if user_decision == 2
+      when 6
+        student_continue = false
       else
         puts "INVALID INPUT"
       end
@@ -527,6 +523,7 @@ while continue
       puts "[4] SHOW ALL THE COURSE and ADD or REMOVE SUBJECTS in COURSES"
       puts "[5] SHOW ALL THE STUDENTS ON THE SPECIFIC COURSE"
       puts "[6] SHOW ALL THE SUBJECTS ON THE SPECIFIC COURSE"
+      puts "[7] GO BACK"
       action = gets.chomp.to_i
 
       case action
@@ -573,6 +570,8 @@ while continue
         user_decision = gets.chomp.to_i
         course_continue = false if user_decision == 2
         system("Clear") || system("cls")
+      when 7
+        course_continue = false
       else
         puts "INVALID INPUT"
       end
@@ -588,6 +587,7 @@ while continue
       puts "[2] DELETE A SUBJECT"
       puts "[3] UPDATE SUBJECT"
       puts "[4] SHOW ALL THE SUBJECT"
+      puts "[5] GO BACK"
       action = gets.chomp.to_i
 
       case action
@@ -622,6 +622,8 @@ while continue
         user_decision = gets.chomp.to_i
         subject_continue = false if user_decision == 2
         system("Clear") || system("cls")
+      when 5
+        subject_continue = false
       else
         puts "INVALID INPUT"
       end
@@ -637,6 +639,7 @@ while continue
       puts "[2] DELETE A TEACHER"
       puts "[3] UPDATE TEACHER"
       puts "[4] SHOW ALL THE TEACHER"
+      puts "[5] GO BACK"
       action = gets.chomp.to_i
 
       case action
@@ -669,6 +672,8 @@ while continue
         puts "Press '1' if you want to continue. Press '2' if you want to go back to management section"
         user_decision = gets.chomp.to_i
         teacher_continue = false if user_decision == 2
+      when 5
+        teacher_continue = false
       else
         puts "INVALID INPUT"
       end

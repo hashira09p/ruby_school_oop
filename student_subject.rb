@@ -35,14 +35,8 @@ class StudentSubject
   end
 
   def self.find_by_id(id_input)
-    @@records.each do |element|
-      if element.id == id_input
-        element.subject_id
-      end
-    end
-  end
-
-  def self.find_by_id(id_input)
     @@records.find{|element| element.id == id_input}
   end
+
+
 end
