@@ -1,5 +1,6 @@
 require_relative 'student_subject'
-class Student
+require_relative 'school_management'
+class Student < SchoolManagement
   attr_accessor :id, :name, :birth_date, :email, :phone_number, :course_id, :deleted_at
 
   def initialize(id = nil, name = nil, birth_date = nil, email = nil, phone_number = nil, course_id = nil, deleted_at = nil)

@@ -1,4 +1,5 @@
-class Teacher
+require_relative 'school_management'
+class Teacher < SchoolManagement
   attr_accessor :id, :name, :birth_date, :email, :phone_number, :department, :deleted_at
 
   def initialize(id = nil, name = nil, birth_date = nil, email = nil, phone_number = nil, department = nil, deleted_at=nil)
